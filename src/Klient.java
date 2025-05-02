@@ -1,19 +1,46 @@
 public class Klient {
-    int id;
-    String imie;
-    String nazwisko;
-    String email;
-    boolean czyStaly;
+    private int id;
+    private String imie;
+    private String nazwisko;
+    private String email;
+    private boolean czyStaly;
 
-    public Klient(int id, String imie, String nazwisko, String email, boolean czyStaly) {
+    public void setId(int id) {
         this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setImie(String imie) {
         this.imie = imie;
+    }
+    public String getImie() {
+        return imie;
+    }
+
+    public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
+    }
+    public String getNazwisko() {
+        return nazwisko;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setCzyStaly(boolean czyStaly) {
         this.czyStaly = czyStaly;
+    }
+    public boolean getCzyStaly() {
+        return czyStaly;
     }
 
     public void wyswietlInformacje() {
-        System.out.println("Klient: " + imie + " " + nazwisko + " | Email: " + email + " | Stały klient: " + (czyStaly ? "Tak" : "Nie"));
+        System.out.println("Klient: " + imie + " " + nazwisko + ", Email: " + email + ", Stały klient: " + czyStaly);
     }
 }

@@ -1,41 +1,75 @@
-import java.util.Date;
-
 public class Zamowienie {
-    int id;
-    Klient klient;
-    Produkt[] produkty;
-    int[] ilosci;
-    String dataZamowienia;
-    String status;
+    private int id;
+    private Klient klient;
+    private Produkt[] produkty;
+    private int[] ilosci;
+    private String dataZamowienia;
+    private String status;
 
-    public Zamowienie(int id, Klient klient, Produkt[] produkty, int[] ilosci) {
+    public void setId(int id) {
         this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setKlient(Klient klient) {
         this.klient = klient;
+    }
+    public Klient getKlient() {
+        return klient;
+    }
+
+    public void setProdukty(Produkt[] produkty) {
         this.produkty = produkty;
+    }
+    public Produkt[] getProdukty() {
+        return produkty;
+    }
+
+    public void setIlosci(int[] ilosci) {
         this.ilosci = ilosci;
-        this.dataZamowienia = new Date().toString();  // Для простоты используем текущую дату
-        this.status = "Nowe";
+    }
+    public int[] getIlosci() {
+        return ilosci;
+    }
+
+    public void setDataZamowienia(String data) {
+        this.dataZamowienia = data;
+    }
+    public String getDataZamowienia() {
+        return dataZamowienia;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public String getStatus() {
+        return status;
     }
 
     public double obliczWartoscZamowienia() {
         double suma = 0;
         for (int i = 0; i < produkty.length; i++) {
-            suma += produkty[i].cena * ilosci[i];
+            suma += produkty[i].getCena() * ilosci[i];
         }
         return suma;
     }
 
-    public void wyswietlSzczegoly() {
-        System.out.println("Zamówienie ID: " + id + " | Data: " + dataZamowienia + " | Status: " + status);
-        klient.wyswietlInformacje();
-        System.out.println("Produkty:");
-        for (int i = 0; i < produkty.length; i++) {
-            System.out.println(produkty[i].nazwa + " x" + ilosci[i]);
+    public double zastosujZnizke() {
+        double wartosc = obliczWartoscZamowienia();
+        if (klient.getCzyStaly()) {
+            wartosc *= 0.9;
         }
-        System.out.println("Łączna wartość: " + obliczWartoscZamowienia() + " PLN");
+        return wartosc;
     }
 
-    public void setStatus(String nowyStatus) {
-        this.status = nowyStatus;
+    public void wyswietlSzczegoly() {
+        System.out.println("Zamówienie nr " + id + ", Data: " + dataZamowienia + ", Status: " + status);
+        klient.wyswietlInformacje();
+        for (int i = 0; i < produkty.length; i++) {
+            System.out.println("- " + produkty[i].getNazwa() + ", Ilość: " + ilosci[i]);
+        }
+        System.out.println("Wartość zamówienia (po zniżce): " + zastosujZnizke());
     }
 }
